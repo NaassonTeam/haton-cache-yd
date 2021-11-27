@@ -9,9 +9,10 @@ use Ratchet\WebSocket\WsServer;
 require 'vendor/autoload.php';
 
 $loop   = React\EventLoop\Factory::create();
-$pusher = new ServerWS\Pusher;
+$pusher = new Pusher();
 
 // Listen for the web server to make a ZeroMQ push after an ajax request
+// $context = new React\ZMQ\Context($loop);
 $context = new React\ZMQ\Context($loop);
 $pull = $context->getSocket(ZMQ::SOCKET_PULL);
 $pull->bind('tcp://127.0.0.1:5555'); // Binding to 127.0.0.1 means the only client that can connect is itself
