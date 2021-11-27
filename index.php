@@ -24,7 +24,7 @@ $result = $s3Client->getObject([
 if(!empty($result['Body'])){
     echo json_encode([
         'status' => 'success',
-        'body' => $result['Body'],
+        'body' => base64_encode($result['Body']),
         'last-modified' => $result['LastModified'],
     ]);
 } else {
