@@ -21,5 +21,16 @@ $result = $s3Client->getObject([
     'Key' => $key
 ]);
 
-echo $result['Body'];
-echo $result['LastModified'];
+if(!empty($result['Body'])){
+    echo json_encode([
+        'status' => 'success',
+        'body' => $result['Body'],
+        'last-modified' => $result['LastModified'],
+    ]);
+} else {
+    echo json_encode([
+        'status' => 'fail',
+        'key' => $key,
+        'url' => 'https://haton.ru' . $_SERVER['REQUEST_URI'],
+    ]);
+}
